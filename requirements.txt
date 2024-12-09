@@ -1,0 +1,4 @@
+discord.py>=2.4.0
+bandit>=1.7.5
+pylint>=2.15.0
+pre-commit>=3.3.0
