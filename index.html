@@ -1,0 +1,435 @@
+<html><head><base href="/" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://sethispr.github.io/fos/">
+<style>
+:root {
+  --dark-bg: #000000;
+  --card-bg: #0A0A0A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #888888;
+  --accent: #FFFFFF;
+  --highlight: #CCCCCC;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+body {
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  line-height: 1.7;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  color: var(--accent);
+  margin: 2rem 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+h2:hover {
+  transform: translateX(10px);
+  color: var(--highlight);
+}
+
+h2 .number {
+  font-size: 2rem;
+  color: var(--highlight);
+  opacity: 0.5;
+  font-weight: 700;
+  line-height: 1;
+}
+
+h3 {
+  color: var(--text-primary);
+  margin: 1.25rem 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+p, li {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-weight: 300;
+  font-size: 0.95rem;
+}
+
+ul {
+  list-style: none;
+  margin-left: 0.5rem;
+}
+
+li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+li::before {
+  content: '•';
+  color: var(--highlight);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.03);
+  margin: 2rem 0;
+}
+
+.effective-date {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+.highlight {
+  color: var(--highlight);
+  font-weight: 500;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  z-index: 1000;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.05s ease;
+}
+
+.contact-tag {
+  color: var(--accent);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+}
+
+.contact-tag:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-3px);
+}
+
+.scroll-top:active {
+  transform: translateY(0);
+}
+
+.scroll-top svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 2rem;
+  }
+  
+  .container {
+    padding: 3rem;
+    border-radius: 24px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.3rem;
+  }
+  
+  p, li {
+    font-size: 1.05rem;
+  }
+  
+  .scroll-top {
+    bottom: 2rem;
+    right: 2rem;
+    width: 45px;
+    height: 45px;
+  }
+  
+  .scroll-top svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--highlight);
+  color: black;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+section::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.02);
+}
+
+.step-card {
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  margin: 0.25rem;
+  font-weight: 400;
+}
+
+.note {
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--accent);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.code-block {
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--accent);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+  .code-block {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+</style>
+</head><body>
+<div class="progress-bar">
+  <div class="progress-fill"></div>
+</div>
+
+<div class="container">
+  <h1>Terms of Services</h1>
+  
+  <section>
+    <h2><span class="number">1</span>Introduction</h2>
+    <p>Nerd Bot is a specialized Discord bot designed for calculating your stats. This guide will help you understand how to use the bot effectively.</p>
+  </section>
+
+  <section>
+    <h2><span class="number">2</span>Basic Usage</h2>
+    <p>The primary command for the bot is /calc. This command processes your in-game statistics and returns detailed metrics.</p>
+    
+    <div class="note">
+      <strong>Command Format:</strong><br>
+      /calc [experience] [rounds] [targets] [escapes] [protected] [damage] [final shots] [survival] [ffa kills] [ffa wins] [infected killed] [infection survival] [infections] [epidemic] [sdi] [device]
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="number">3</span>Parameters Explained</h2>
+    <ul>
+      <li><span class="highlight">Experience:</span> XPB minus XPA value</li>
+      <li><span class="highlight">SDI:</span> Server Difficulty Index (typically between 0.9 and 1.3)</li>
+      <li><span class="highlight">Device:</span> Your main playing platform (pc, phone, tablet, console)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="number">4</span>Example Usage</h2>
+    <div class="note">
+      /calc 92086 221 3 3 72 120133 45 25 441 16 321 14 30 3 0.9992 pc
+      Note: Type in /calc then press the "Enter" key and finally paste in your stats similar to the format above.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="number">5</span>Understanding Results</h2>
+    <div class="note">
+      OP = 905<br>
+      TP = 534, SP = 636<br>
+      [GO = 129], [AD = 642], [XPR = 422]<br>
+      SDI = 0.9992<br>
+      Division: Firestorm (A)
+    </div>
+    
+    <div class="step-card">
+      <h3>Metrics Explained</h3>
+      <ul>
+        <li><span class="highlight">OP (Overall Performance):</span> Your total performance score combining all metrics</li>
+        <li><span class="highlight">TP (Tactical Performance):</span> Score based on your tactical abilities</li>
+        <li><span class="highlight">SP (Special Performance):</span> Score reflecting your performance in special game modes (ffa, infection)</li>
+        <li><span class="highlight">SDI (Server Difficulty Index):</span> Reflects the server's difficulty level</li>
+        <li><span class="highlight">Division:</span>Your division rank based on your OP score. Click the buttonn below to further understand (links you to the Discord channel)</li>
+      </ul>
+
+      <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="https://docs.google.com/spreadsheets/d/1WYypxOpGDC7gItIJsTzPHxEVwynUPSPRrWu9dCJIsZY/edit?usp=sharing" 
+           class="contact-tag" 
+           target="_blank">
+           SDI Reference Sheet
+        </a>
+        <a href="https://discord.com/channels/927525953360498760/1275606337505460275" 
+           class="contact-tag" 
+           target="_blank">
+           Division Rankings
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<button class="scroll-top" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M12 4l8 8h-6v8h-4v-8H4z"/>
+  </svg>
+</button>
+
+<script>
+const progressFill = document.querySelector('.progress-fill');
+
+document.addEventListener('scroll', () => {
+  const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  requestAnimationFrame(() => {
+    progressFill.style.width = scrollPercent + '%';
+  });
+  
+  const scrollButton = document.querySelector('.scroll-top');
+  if (window.scrollY > window.innerHeight / 2) {
+    scrollButton.classList.add('visible');
+  } else {
+    scrollButton.classList.remove('visible');
+  }
+});
+
+document.querySelector('.scroll-top').addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+document.querySelectorAll('section').forEach((section) => {
+  section.style.opacity = '0';
+  section.style.transform = 'translateY(20px)';
+  section.style.transition = 'all 0.5s ease-out';
+  observer.observe(section);
+});
+</script>
+</body></html>
