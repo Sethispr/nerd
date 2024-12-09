@@ -1,0 +1,422 @@
+<html><head><base href="/" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark-bg: #000000;
+  --card-bg: #0A0A0A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #888888;
+  --accent: #FFFFFF;
+  --highlight: #CCCCCC;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+body {
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  line-height: 1.7;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  color: var(--accent);
+  margin: 2rem 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+h2:hover {
+  transform: translateX(10px);
+  color: var(--highlight);
+}
+
+h2 .number {
+  font-size: 2rem;
+  color: var(--highlight);
+  opacity: 0.5;
+  font-weight: 700;
+  line-height: 1;
+}
+
+h3 {
+  color: var(--text-primary);
+  margin: 1.25rem 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+p, li {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-weight: 300;
+  font-size: 0.95rem;
+}
+
+ul {
+  list-style: none;
+  margin-left: 0.5rem;
+}
+
+li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+li::before {
+  content: '•';
+  color: var(--highlight);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.03);
+  margin: 2rem 0;
+}
+
+.effective-date {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+.highlight {
+  color: var(--highlight);
+  font-weight: 500;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  z-index: 1000;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.05s ease;
+}
+
+.contact-tag {
+  color: var(--accent);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+}
+
+.contact-tag:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-3px);
+}
+
+.scroll-top:active {
+  transform: translateY(0);
+}
+
+.scroll-top svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 2rem;
+  }
+  
+  .container {
+    padding: 3rem;
+    border-radius: 24px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.3rem;
+  }
+  
+  p, li {
+    font-size: 1.05rem;
+  }
+  
+  .scroll-top {
+    bottom: 2rem;
+    right: 2rem;
+    width: 45px;
+    height: 45px;
+  }
+  
+  .scroll-top svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--highlight);
+  color: black;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+section::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.02);
+}
+
+.note {
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--accent);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--text-primary);
+}
+
+</style>
+</head>
+<body>
+  <title>nerd privacy policy</title>
+<div class="progress-bar">
+  <div class="progress-fill"></div>
+</div>
+
+<div class="container">
+  <h1>Privacy Policy</h1>
+  <p class="effective-date">Effective Date: 12/09/2024</p>
+
+  <section>
+    <h2><span class="number">1</span>Introduction</h2>
+    <p>Nerd Bot (hereafter referred to as "the Bot") values your privacy. This Privacy Policy explains what data is collected, how it is used, and your rights regarding your interactions with the Bot.</p>
+  </section>
+
+  <section>
+    <h2><span class="number">2</span>Data Collection</h2>
+    <h3>a. User-Provided Data</h3>
+    <ul>
+      <li>Command Inputs: The Bot processes the inputs provided by users to execute commands (e.g., in-game statistics, device type). These inputs are temporarily stored during command execution and are not retained after the process is completed.</li>
+    </ul>
+
+    <h3>b. Metadata</h3>
+    <ul>
+      <li>Interaction Data: Basic metadata, such as timestamps and the server where commands were used, may be logged for debugging and analytics purposes.</li>
+      <li>Discord Information: The Bot may access usernames, user IDs, and server IDs as part of normal Discord interactions. This information is not stored or shared.</li>
+    </ul>
+
+    <h3>c. No Sensitive Personal Data</h3>
+    <ul>
+      <li>The Bot does not collect sensitive personal information (e.g., email addresses, passwords, financial data). Users should refrain from inputting such information into the Bot.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="number">3</span>Data Usage</h2>
+    <p>The Bot uses collected data solely for the following purposes:</p>
+    <ul>
+      <li>To execute commands as requested by users.</li>
+      <li>To improve the Bot's functionality, performance, and user experience.</li>
+      <li>To identify and resolve errors or technical issues.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="number">4</span>Data Sharing</h2>
+    <ul>
+      <li>No Third-Party Sharing: The Bot does not share your data with third parties.</li>
+      <li>External Links: The Bot may provide links to external resources (e.g., Desmos calculator). Interaction with these external services is governed by their respective privacy policies, and Nerd Bot assumes no responsibility for their data handling practices.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="number">5</span>Data Retention</h2>
+    <ul>
+      <li>Temporary Data: User-provided inputs are processed in real time and are not stored after the command is completed.</li>
+      <li>Metadata: Minimal metadata may be retained for debugging or performance optimization but will not contain personally identifiable information.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="number">6</span>User Rights</h2>
+    <p>As a user, you have the following rights regarding your data:</p>
+    <ul>
+      <li>Right to Access: You can request to know what metadata, if any, is logged.</li>
+      <li>Right to Erasure: You may request that any retained metadata be deleted, where applicable.</li>
+      <li>Right to Restriction: You may request limited processing of your interactions if you have concerns about data handling.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="number">7</span>Security</h2>
+    <p>The Bot implements reasonable technical and organizational measures to secure your data and protect it from unauthorized access, use, or disclosure. However, no system can guarantee complete security, especially in a shared platform like Discord.</p>
+  </section>
+
+  <section>
+    <h2><span class="number">8</span>Children's Privacy</h2>
+    <p>The Bot is not intended for use by individuals under the age of 13. If you believe a child has interacted with the Bot, please notify the Bot's creator to address any data concerns.</p>
+  </section>
+
+  <section>
+    <h2><span class="number">9</span>Changes to This Privacy Policy</h2>
+    <p>This Privacy Policy may be updated periodically. Users will be notified of significant changes through announcements on the relevant Discord server. Continued use of the Bot after updates constitutes acceptance of the revised Privacy Policy.</p>
+  </section>
+
+  <section>
+    <h2><span class="number">10</span>Contact</h2>
+    <p>If you have questions, concerns, or requests regarding this Privacy Policy, please contact the Bot's creator at:</p>
+    <div class="note">
+      Discord: @sethyl
+    </div>
+  </section>
+
+  <section>
+    <p>By using Nerd Bot, you acknowledge and agree to the practices described in this Privacy Policy.</p>
+  </section>
+</div>
+
+<button class="scroll-top" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M12 4l8 8h-6v8h-4v-8H4z"/>
+  </svg>
+</button>
+
+<script>
+const progressFill = document.querySelector('.progress-fill');
+
+document.addEventListener('scroll', () => {
+  const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  requestAnimationFrame(() => {
+    progressFill.style.width = scrollPercent + '%';
+  });
+  
+  const scrollButton = document.querySelector('.scroll-top');
+  if (window.scrollY > window.innerHeight / 2) {
+    scrollButton.classList.add('visible');
+  } else {
+    scrollButton.classList.remove('visible');
+  }
+});
+
+document.querySelector('.scroll-top').addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+document.querySelectorAll('section').forEach((section) => {
+  section.style.opacity = '0';
+  section.style.transform = 'translateY(20px)';
+  section.style.transition = 'all 0.5s ease-out';
+  observer.observe(section);
+});
+</script>
+</body></html>
