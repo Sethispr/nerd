@@ -1,13 +1,8 @@
 [MASTER]
-# Specify a configuration file.
 rcfile=
-
-# Python code to analyze
-ignore=venv,__pycache__,migrations
+ignore=__pycache__
 
 [MESSAGES CONTROL]
-# Disable the following messages
-# Some common ones for Discord bots include:
 disable=
     missing-module-docstring,
     missing-class-docstring,
@@ -19,43 +14,31 @@ disable=
     broad-except
 
 [REPORTS]
-# Only display messages
 reports=no
+score=yes
 
 [BASIC]
-# Good variable names that should always be allowed
 good-names=i,j,k,ex,Run,bot,ctx
 
-# Allow longer variable names for descriptive commands
-max-name-length=30
-
 [DESIGN]
-# Maximum number of arguments for functions/methods
-max-args=6
-
-# Allow a higher number of attributes for classes (common for bots)
+max-args=8
 max-attributes=15
 
 [FORMAT]
-# Maximum number of characters on a single line.
-max-line-length=120
+max-line-length=150
 
 [TYPECHECK]
-# Generate dynamic attributes for classes with __slots__ or when specified by plugins.
-generated-members=numpy.*,torch.*,discord.*,commands.*
-
-[IMPORTS]
-# Allow wildcard imports from cog modules (common in Discord bot development)
-extensions=pkg_resources.extern.*,discord.ext.commands.*
+generated-members=discord.*,commands.*
 
 [LOGGING]
-# Allow format strings in logging calls
 logging-format-style=old
 
 [VARIABLES]
-# Allow constants to be lowercase (e.g., config variables)
 const-rgx=(([a-z_][a-z0-9_]*)|(__.*__))$
 
 [SIMILARITIES]
-# Disable similarity checks (optional, reduces noise in reports)
-ignore-similarities=yes
+ignore-comments=yes
+ignore-docstrings=yes
+ignore-imports=yes
+ignore-signatures=yes
+min-similarity-lines=6
