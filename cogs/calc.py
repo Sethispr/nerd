@@ -10,7 +10,7 @@ from discord.ext import commands
 
 class CalcCog(commands.Cog):
     """
-    A cog for calculating OP from various game statistics.
+    A cog for calculating OP from various in-game statistics.
     """
 
     def __init__(self, bot):
