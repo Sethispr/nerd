@@ -15,7 +15,7 @@ Welcome to the documentation for **Nerd Bot** – a Discord bot to calculate you
 
 ---
 
-## 2. Basic Usage
+## 1. Basic Usage
 
 The primary command to interact with Nerd Bot is `/calc`. This command processes your in-game statistics* (as an input) and returns the formatted calculations back to you.
 
@@ -26,7 +26,7 @@ The primary command to interact with Nerd Bot is `/calc`. This command processes
 
 ---
 
-## 3. Parameters Explained
+## 2. Parameters Explained
 
 Here’s a breakdown of the parameters you need to input when using the `/calc` command:
 
@@ -37,7 +37,7 @@ Here’s a breakdown of the parameters you need to input when using the `/calc` 
 
 ---
 
-## 4. Example Usage
+## 3. Example Usage
 
 To use Nerd Bot, simply type the `/calc` command then the press the "Enter" key and followed by your in-game statistics, formatted like so:
 
@@ -51,11 +51,11 @@ To use Nerd Bot, simply type the `/calc` command then the press the "Enter" key 
 
 ---
 
-## 5. Understanding Results
+## 4. Understanding Results
 
 Once you run the `/calc` command with your stats, Nerd Bot will return results similar to the following:
 
-```glsl
+```ruby
 OP = 905
 TP = 534, SP = 636
 [GO = 129], [AD = 642], [XPR = 422]
