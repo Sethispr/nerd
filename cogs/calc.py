@@ -1,48 +1,72 @@
+"""
+This module contains the CalcCog, which provides a command to calculate OP (Overall Performance)
+from various statistics in a game, including rounds played, kills, damage dealt, and more.
+"""
+
+import math
 import discord
 from discord import app_commands
 from discord.ext import commands
-import math
 
 class CalcCog(commands.Cog):
+    """
+    A cog for calculating OP from various game statistics.
+    """
+
     def __init__(self, bot):
+        """
+        Initialize the CalcCog with the bot instance.
+
+        Args:
+            bot (discord.Bot): The bot instance.
+        """
         self.bot = bot
 
-    def calculate_metrics(self, rounds_played, targets_assassinated, escapes, targets_protected,
-                          damage_dealt, final_shots, target_survival, free_for_all_kills,
-                          free_for_all_wins, infected_killed, infection_survival, infections,
-                          epidemic, xpb_minus_xpa, sdi=1, device="pc"):
-        R = rounds_played
-        D = damage_dealt
-        T = targets_assassinated
-        t = target_survival
-        F = free_for_all_kills
-        w = free_for_all_wins
-        i = infected_killed
-        s = infection_survival
-        I = infections
-        E = escapes
-        Sf = final_shots
-        P = targets_protected
-        e_p = epidemic
-        X_T = xpb_minus_xpa
+    def calculate_metrics(self, stats, sdi=1, device="pc"):
+        """
+        Calculate various game metrics based on provided statistics.
 
+        Args:
+            stats (dict): A dictionary containing the game statistics.
+            sdi (float): SDI (Score Deviation Index), default is 1.
+            device (str): The device used (e.g., "pc", "mobile", "tablet"), default is "pc".
+
+        Returns:
+            dict: A dictionary containing various calculated metrics.
+        """
+        rounds_played = stats["rounds_played"]
+        damage_dealt = stats["damage_dealt"]
+        targets_assassinated = stats["targets_assassinated"]
+        target_survival = stats["target_survival"]
+        free_for_all_kills = stats["free_for_all_kills"]
+        free_for_all_wins = stats["free_for_all_wins"]
+        infected_killed = stats["infected_killed"]
+        infection_survival = stats["infection_survival"]
+        infections = stats["infections"]
+        escapes = stats["escapes"]
+        final_shots = stats["final_shots"]
+        targets_protected = stats["targets_protected"]
+        epidemic = stats["epidemic"]
+        xpb_minus_xpa = stats["xpb_minus_xpa"]
+
+        # Auto penalty calculation
         auto_penalty = None
-        if (T + t) / R < 0.12:
-            auto_penalty = R + 3 * (0.12 * R - (T + t))
-            R = max(round(auto_penalty // 2 * 2), R)
+        if (targets_assassinated + target_survival) / rounds_played < 0.12:
+            auto_penalty = rounds_played + 3 * (0.12 * rounds_played - (targets_assassinated + target_survival))
+            rounds_played = max(round(auto_penalty // 2 * 2), rounds_played)
 
-        R_ad = R - E
-        R_g = R_ad - E - t - e_p - s - w
+        rounds_adjusted = rounds_played - escapes
+        rounds_gamified = rounds_adjusted - escapes - target_survival - epidemic - infection_survival - free_for_all_wins
 
-        S_ma = (2 / 3) * (sdi - 1) + 1 if sdi >= 1 else 1 + ((2 / 3) * (sdi - 1) + 1) - 1
-        S_mb = (4 / 3) * (sdi - 1) + 1 if sdi >= 1 else 1 + ((4 / 3) * (sdi - 1) + 1) - 1
+        s_ma = (2 / 3) * (sdi - 1) + 1 if sdi >= 1 else 1 + ((2 / 3) * (sdi - 1) + 1) - 1
+        s_mb = (4 / 3) * (sdi - 1) + 1 if sdi >= 1 else 1 + ((4 / 3) * (sdi - 1) + 1) - 1
 
-        g_os = 46 * ((sdi * 5 * Sf + S_ma * 3 * P) / max(1, R_g))
+        g_os = 46 * ((sdi * 5 * final_shots + s_ma * 3 * targets_protected) / max(1, rounds_gamified))
 
-        D_avg = D / max(1, (R_ad - (E + t + e_p)))
+        d_avg = damage_dealt / max(1, (rounds_adjusted - (escapes + target_survival + epidemic)))
 
-        t_p = (2 * R_ad * (86 * g_os + S_mb * 32 * D_avg) + sdi * 59 * X_T) / (165 * R_ad)
-        z_p = (13 / R_ad) * (S_mb * (9 * F + 15 * i + 40 * w + 25 * I + 100 * e_p) + S_ma * 15 * s)
+        t_p = (2 * rounds_adjusted * (86 * g_os + s_mb * 32 * d_avg) + sdi * 59 * xpb_minus_xpa) / (165 * rounds_adjusted)
+        z_p = (13 / rounds_adjusted) * (s_mb * (9 * free_for_all_kills + 15 * infected_killed + 40 * free_for_all_wins + 25 * infections + 100 * epidemic) + s_ma * 15 * infection_survival)
         o_p = (529 / 20) * math.sqrt(t_p + z_p)
 
         boost_multiplier = 1.0
@@ -75,14 +99,14 @@ class CalcCog(commands.Cog):
         else:
             division = "Ember (E)"
 
-        x_pr = X_T / max(1, R_ad)
+        x_pr = xpb_minus_xpa / max(1, rounds_adjusted)
 
         return {
             "OP": boosted_o_p,
             "TP": t_p,
             "SP": z_p,
             "GO": g_os,
-            "AD": D_avg,
+            "AD": d_avg,
             "XPR": x_pr,
             "Division": division,
             "SDI": sdi,
@@ -91,11 +115,16 @@ class CalcCog(commands.Cog):
 
     @app_commands.command(name="calc", description="Calculate OP from a copypasta")
     @app_commands.describe(
-        stats=(
-            "Format: exp rounds played till epidemics sdi device"
-        )
+        stats="Format: exp rounds played till epidemics sdi device"
     )
     async def calc(self, interaction: discord.Interaction, stats: str):
+        """
+        Calculate the OP from a set of game statistics.
+
+        Args:
+            interaction (discord.Interaction): The interaction object.
+            stats (str): A string containing the game statistics in a specific format.
+        """
         try:
             data = stats.split()
             if len(data) != 16:
@@ -119,13 +148,27 @@ class CalcCog(commands.Cog):
             device = data[15].lower()
 
             if device == "laptop":
-                device = "pc"  
+                device = "pc"
 
             metrics = self.calculate_metrics(
-                rounds_played, targets_assassinated, escapes, targets_protected,
-                damage_dealt, final_shots, target_survival, free_for_all_kills,
-                free_for_all_wins, infected_killed, infection_survival, infections,
-                epidemic, xpb_minus_xpa, sdi, device
+                {
+                    "rounds_played": rounds_played,
+                    "targets_assassinated": targets_assassinated,
+                    "escapes": escapes,
+                    "targets_protected": targets_protected,
+                    "damage_dealt": damage_dealt,
+                    "final_shots": final_shots,
+                    "target_survival": target_survival,
+                    "free_for_all_kills": free_for_all_kills,
+                    "free_for_all_wins": free_for_all_wins,
+                    "infected_killed": infected_killed,
+                    "infection_survival": infection_survival,
+                    "infections": infections,
+                    "epidemic": epidemic,
+                    "xpb_minus_xpa": xpb_minus_xpa
+                },
+                sdi=sdi,
+                device=device
             )
 
             if metrics:
@@ -136,7 +179,7 @@ class CalcCog(commands.Cog):
 
                 embed = discord.Embed(
                     title=title,
-                    color=discord.Color.from_rgb(250, 254, 99)
+                    color=discord.Color.from_rgb(82,146,209)
                 )
 
                 formatted_message = (
@@ -146,14 +189,13 @@ class CalcCog(commands.Cog):
                     f"[GO = {int(metrics['GO'])}], [AD = {int(metrics['AD'])}], [XPR = {int(metrics['XPR'])}]\n"
                     f"SDI = {metrics['SDI']:.4f}\n\n"
                     f"Division: {metrics['Division']}\n"
-                    f"```")
+                    f"```"
+                )
 
                 embed.description = formatted_message
 
-                desmos_button = discord.ui.Button(style=discord.ButtonStyle.url, label="desmos", url="https://www.desmos.com/calculator/m60vove8wv")
                 seths_button = discord.ui.Button(style=discord.ButtonStyle.url, label="web", url="https://sethispr.github.io/fos/")
-                user_input_button = discord.ui.Button(label="show input", style=discord.ButtonStyle.primary)
-                
+                user_input_button = discord.ui.Button(label="", style=discord.ButtonStyle.success, emoji="📄")
                 trash_button = discord.ui.Button(label="", style=discord.ButtonStyle.danger, emoji="🗑️")
 
                 async def show_input_callback(interaction):
@@ -175,7 +217,8 @@ class CalcCog(commands.Cog):
                         f"Epidemic: {epidemic}\n"
                         f"SDI: {sdi}\n"
                         f"Device: {device}\n"
-                        f"```")
+                        f"```"
+                    )
                     await interaction.response.send_message(input_stats_message, ephemeral=True)
 
                 async def clear_message_callback(interaction: discord.Interaction):
@@ -199,4 +242,10 @@ class CalcCog(commands.Cog):
             await interaction.response.send_message(f"ULTRA RARE ERROR: {str(e)}")
 
 async def setup(bot):
+    """
+    Setup function to add the CalcCog to the bot.
+
+    Args:
+        bot (discord.Bot): The bot instance.
+    """
     await bot.add_cog(CalcCog(bot))
