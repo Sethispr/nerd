@@ -1,14 +1,11 @@
 <div align="center">
   
   # Nerd Bot
-  
-[![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1p3v3.svg)](https://fos.betteruptime.com/)
 </div>
 
 [![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)](https://sethispr.github.io/nerd/) 
 
-
-Welcome to the documentation for **Nerd Bot** – a Discord bot to calculate your in-game statistics. This guide will help you get started and make the most out of Nerd Bot's one literal command /calc.
+Welcome to the documentation for **Nerd Bot** – a Discord bot to calculate your in-game statistics. This guide will help you get started and make the most out of Nerd Bot's one literal command /calc. 
 
 ## Table of Contents
 1. [Basic Usage](#basic-usage)
@@ -77,5 +74,7 @@ Division: Firestorm (A)
 ---
 
 For any further assistance or questions, feel free to reach out to the @Nerds or @sethyl
+
+[![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1p3v3.svg)](https://fos.betteruptime.com/)
 
 ---
