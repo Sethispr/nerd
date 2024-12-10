@@ -21,7 +21,7 @@ The primary command to interact with Nerd Bot is `/calc`. This command processes
 
 ### Command Format:
 ```ruby
-/calc [experience] [rounds] [targets] [escapes] [protected] [damage] [final shots] [survival] [ffa kills] [ffa wins] [infected killed] [infection survival] [infections] [epidemic] [sdi] [device]
+/calc [experience] [rounds] [targets eliminated] [escapes] [targets protected] [damage dealt] [final shots] [ffa kills] [ffa wins] [infected killed] [infection survival] [infections] [epidemic] [sdi] [device]
 ```
 
 ---
