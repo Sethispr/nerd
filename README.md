@@ -1,9 +1,10 @@
 <div align="center">
   
   # Nerd Bot
+  
+[![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1p3v3.svg)](https://fos.betteruptime.com/)
 </div>
 
-[![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1p3v3.svg)](https://fos.betteruptime.com/)
 [![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)](https://sethispr.github.io/nerd/) 
 
 
