@@ -1,17 +1,42 @@
+"""
+This module contains the PingCog, which includes a command to check the bot's latency.
+It also defines a listener to print a message when the cog is ready.
+"""
+
 import discord
 from discord.ext import commands
 
 class PingCog(commands.Cog):
+    """
+    A cog for handling ping-related commands and events for the bot.
+    """
+
     def __init__(self, bot):
+        """
+        Initialize the PingCog with the bot instance.
+        
+        Args:
+            bot (discord.Bot): The bot instance.
+        """
         self.bot = bot
 
     @commands.Cog.listener()
     async def on_ready(self):
+        """
+        Called when the bot is ready and the cog is loaded.
+        This listener will print a message to the console.
+        """
         print("PingCog is ready.")
 
     @discord.app_commands.command(name="ping", description="Check the bot's latency")
     async def ping(self, interaction: discord.Interaction):
-        latency = round(self.bot.latency * 1000)
+        """
+        Respond with the bot's latency in milliseconds.
+        
+        Args:
+            interaction (discord.Interaction): The interaction object representing the command.
+        """
+        latency = round(self.bot.latency * 1000)  # Convert latency to milliseconds
         embed = discord.Embed(
             title="Pong!",
             description=f"Latency is {latency}ms. <:ping:1315726966036496536>",
@@ -22,4 +47,10 @@ class PingCog(commands.Cog):
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 async def setup(bot):
+    """
+    Setup function to add the PingCog to the bot.
+
+    Args:
+        bot (discord.Bot): The bot instance to add the cog to.
+    """
     await bot.add_cog(PingCog(bot))
