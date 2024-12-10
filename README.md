@@ -41,13 +41,13 @@ Here’s a breakdown of the parameters you need to input when using the `/calc` 
 
 To use Nerd Bot, simply type the `/calc` command then the press the "Enter" key and followed by your in-game statistics, formatted like so:
 
-```ruby
+```sh
 /calc 92086 221 3 3 72 120133 45 25 441 16 321 14 30 3 0.9992 pc
 ```
 
-### Notes:
-- Ensure that you input all stats in the correct order and format.
-- Hit "Enter" after typing the `/calc` command followed by your stats.
+> [!NOTE]
+> Ensure that you input all stats in the correct order and format. Refer to [Command Format](#basic-usage).
+> Hit "Enter" after typing the `/calc` command followed by your stats.
 
 ---
 
