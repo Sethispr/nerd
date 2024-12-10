@@ -20,7 +20,7 @@ Welcome to the documentation for **Nerd Bot** – a Discord bot to calculate you
 The primary command to interact with Nerd Bot is `/calc`. This command processes your in-game statistics* (as an input) and returns the formatted calculations back to you.
 
 ### Command Format:
-```glsl
+```ruby
 /calc [experience] [rounds] [targets] [escapes] [protected] [damage] [final shots] [survival] [ffa kills] [ffa wins] [infected killed] [infection survival] [infections] [epidemic] [sdi] [device]
 ```
 
@@ -41,7 +41,7 @@ Here’s a breakdown of the parameters you need to input when using the `/calc` 
 
 To use Nerd Bot, simply type the `/calc` command then the press the "Enter" key and followed by your in-game statistics, formatted like so:
 
-```
+```ruby
 /calc 92086 221 3 3 72 120133 45 25 441 16 321 14 30 3 0.9992 pc
 ```
 
