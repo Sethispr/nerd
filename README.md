@@ -78,3 +78,5 @@ For any further assistance or questions, feel free to reach out to the @Nerds or
 [![Better Stack Badge](https://uptime.betterstack.com/status-badges/v3/monitor/1p3v3.svg)](https://fos.betteruptime.com/)
 
 ---
+
+[Back to top](#basic-usage)
