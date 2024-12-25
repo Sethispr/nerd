@@ -79,4 +79,4 @@ For any further assistance or questions, feel free to reach out to the @Nerds or
 
 ---
 
-[Back to top](#basic-usage)
+[Back to top](https://github.com/Sethispr/nerd?tab=readme-ov-file#nerd-bot)
