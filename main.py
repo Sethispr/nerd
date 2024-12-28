@@ -1,15 +1,19 @@
 """
 Main bot script to initialize and run Nerd bot.
 
-This script includes event handlers for the bot lifecycle and
-custom command synchronization and error handling logic.
+This script includes event handlers for the bot lifecycle,
+custom command synchronization, and error handling logic.
 """
 
 import logging
+import os
+import sys
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
 
-# Configure logging
+# Load bot token from .env file
+load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
 # Set up bot with intents
@@ -20,16 +24,16 @@ bot = commands.Bot(command_prefix=".", intents=intents)
 
 async def load_extensions():
     """Load bot extensions."""
-    try:
-        await bot.load_extension("cogs.calc")
-        await bot.load_extension("cogs.ping")
-        await bot.load_extension("cogs.casual")
-    except ModuleNotFoundError as ex:
-        logging.error("Extension not found: %s", ex)
-    except ImportError as ex:
-        logging.error("Failed to import extension: %s", ex)
-    except Exception as ex:  # Retain as fallback for unexpected errors
-        logging.error("Failed to load an extension: %s", ex)
+    extensions = ["cogs.calc", "cogs.ping", "cogs.casual"]
+    for extension in extensions:
+        try:
+            await bot.load_extension(extension)
+        except ModuleNotFoundError as ex:
+            logging.error("Extension not found: %s", ex)
+        except ImportError as ex:
+            logging.error("Failed to import extension: %s", ex)
+        except Exception as ex:  # Retain as fallback for unexpected errors
+            logging.error("Failed to load extension '%s': %s", extension, ex)
 
 
 async def sync_commands():
@@ -41,9 +45,6 @@ async def sync_commands():
         logging.error("Sync failed due to insufficient permissions: %s", ex)
     except Exception as ex:  # Retain as fallback for unexpected errors
         logging.error("Failed to sync commands: %s", ex)
-
-
-bot_token = ""  # use env/secrets manager soon
 
 
 @bot.event
@@ -74,11 +75,15 @@ async def on_command_error(ctx, error):
 
 
 if __name__ == "__main__":
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+    if BOT_TOKEN is None:
+        logging.critical("Bot token not found. Please set BOT_TOKEN in your .env file.")
+        sys.exit(1)
+
     try:
-        bot.run(bot_token)
+        bot.run(BOT_TOKEN)
     except discord.LoginFailure:
-        logging.critical(
-            "Invalid bot token provided. Please check your token and try again."
-        )
+        logging.critical("Invalid bot token provided. Please check your .env file.")
     except Exception as ex:
         logging.critical("An error occurred while starting the bot: %s", ex)
