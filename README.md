@@ -1,7 +1,7 @@
 <div align="center">
   
   # Nerd Bot
-![nerd_icon](https://www.imghippo.com/i/p2018mTA.png)
+![nerd_icon](https://i.ibb.co/wZmD6t3/nerd-black-2-optimized.png)
 </div>
 
 [![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)](https://sethispr.github.io/nerd/) 
