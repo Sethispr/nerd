@@ -9,9 +9,9 @@ Welcome to the documentation for **Nerd Bot** – a Discord bot to calculate you
 
 ## Table of Contents
 1. [Basic Usage](#basic-usage)
-2. [Parameters Explained](#parameters-explained)
-3. [Example Usage](#example-usage)
-4. [Understanding Results](#understanding-results)
+2. [Extra Parameters](#extra-parameters)
+3. [Example](#example)
+4. [Results](#results)
 
 ---
 
