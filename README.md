@@ -26,9 +26,7 @@ The primary command to interact with Nerd Bot is `/calc`. This command processes
 
 ---
 
-## 2. Parameters Explained
-
-Here’s a breakdown of the parameters you need to input when using the `/calc` command:
+## 2. Extra Parameters
 
 - **Experience (XP)**: Your experience values, typically represented as XPB minus XPA, or second screenshot XP left needed to level up minus first screenshot current XP gained
 - **In-game stats**: Rounds played stat till Epidemic stat
@@ -37,7 +35,7 @@ Here’s a breakdown of the parameters you need to input when using the `/calc` 
 
 ---
 
-## 3. Example Usage
+## 3. Example
 
 To use Nerd Bot, simply type the `/calc` command then the press the "Enter" key and followed by your in-game statistics, formatted like so:
 
@@ -51,7 +49,7 @@ To use Nerd Bot, simply type the `/calc` command then the press the "Enter" key 
 
 ---
 
-## 4. Understanding Results
+## 4. Results
 
 Once you run the `/calc` command with your stats, Nerd Bot will return results similar to the following:
 
@@ -63,7 +61,7 @@ SDI = 0.9992
 Division: Firestorm (A)
 ```
 
-### Metrics Explained:
+### Metrics:
 
 - **OP (Overall Performance)**: Your total performance score combining all game stats
 - **TP (Tactical Performance)**: Score based on your tactical gameplay
